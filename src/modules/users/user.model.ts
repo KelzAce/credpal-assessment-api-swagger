@@ -9,12 +9,18 @@ const userSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-userSchema.set("toJSON", {
-  transform: (_doc, ret) => {
-    delete ret.passwordHash;
-    return ret;
-  },
-});
+// userSchema.set("toJSON", {
+//   transform: (_doc, ret) => {
+//     delete ret.passwordHash;
+//     return ret;
+//   },
+// });
+
+userSchema.methods.toJSON = function () {
+  const { passwordHash, ...user } = this.toObject();
+  return user;
+};
+
 
 export type User = InferSchemaType<typeof userSchema>;
 
