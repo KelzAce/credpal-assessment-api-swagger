@@ -1,0 +1,8 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: credpal_mongo
+    ports:
+      - "27018:27017"
